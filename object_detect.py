@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import time
-
+#akrivi
 cap=cv2.VideoCapture(1)
 #fgbg = cv2.bgsegm.createBackgroundSubtractorMOG()
 moto=0
