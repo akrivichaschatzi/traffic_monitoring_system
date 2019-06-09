@@ -1,16 +1,18 @@
 <?php
-
-if (isset($_GET["msg3"]) && $_GET["msg3"] == 'failed') {
-     $message = "Wrong email. Try again!";
-      echo "<script type='text/javascript'>alert('$message');</script>";
-}
-if (isset($_GET["msg2"]) && $_GET["msg2"] == 'not_success_found_email') {
-      echo "<script type='text/javascript'>alert('Failed to Recover your password');</script>";
-}
-if (isset($_GET["msg1"]) && $_GET["msg1"] == 'success_found_email') {
-      echo "<script type='text/javascript'>alert('Your Password has been sent successfully to your email');</script>";
-}
- ?>
+    session_start();
+    include 'https.php';
+    if (isset($_SESSION['found_email']) && $_SESSION['found_email'] == "false") {
+          echo "<script type='text/javascript'>alert('Wrong email. Try again!');</script>";
+          unset($_SESSION['found_email']);
+    }
+    else if(isset($_SESSION['send_recovery']) && $_SESSION['send_recovery'] == "false") {
+          echo "<script type='text/javascript'>alert('Failed to Recover your password');</script>";
+          unset($_SESSION['send_recovery']);
+    }
+    if (isset($_SESSION['login']) && $_SESSION['login'] == "success") {
+        header("location: charts.php");
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,16 +54,18 @@ if (isset($_GET["msg1"]) && $_GET["msg1"] == 'success_found_email') {
                 <div class="p-5">
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
-                    <p class="mb-4">We get it, stuff happens. Just enter your email address below and we'll send you a link to reset your password!</p>
+                    <p class="mb-4">We get it, stuff happens. Just enter your email address below and we will send you a link to reset your password!</p>
                   </div>
+                  
+                  
                   <form action="forgot-p.php" method="post" class="user">
                     <div class="form-group">
                       <input type="email" class="form-control form-control-user" name="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                     </div>
                     <input type="submit" name="submit" class="btn btn-primary btn-user btn-block" value="Reset Password">
-                      
-                    
                   </form>
+                  
+                  
                   <div class="text-center">
                     <a class="small" href="index.php">Already have an account? Login!</a>
                   </div>

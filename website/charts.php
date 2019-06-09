@@ -1,3 +1,17 @@
+<?php
+
+    session_start();
+    include 'https.php';
+    if (!isset($_SESSION['login']) || $_SESSION['login'] != "success") {
+        header("location: index.php");
+    }
+    if (isset($_SESSION['recovery_success']) &&  $_SESSION['recovery_success'] == "true"){
+         echo "<script type='text/javascript'>alert('Has been reset successfully the password');</script>";
+         unset($_SESSION['recovery_success']);
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -144,7 +158,7 @@
                   Settings
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="index.php" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="logout.php" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
@@ -238,7 +252,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="index.php">Logout</a>
+          <a class="btn btn-primary" href="logout.php">Logout</a>
         </div>
       </div>
     </div>

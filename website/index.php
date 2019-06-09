@@ -1,8 +1,25 @@
-<?php
-if (isset($_GET["msg"]) && $_GET["msg"] == 'failed') {
-     $message = "Wrong password or email. Try again!";
+ <?php
+  
+  include 'https.php';
+  session_start();
+  if (isset($_SESSION['login']) && $_SESSION['login'] == "failed") {
+      $message = "Wrong password or email. Try again!";
       echo "<script type='text/javascript'>alert('$message');</script>";
-} ?>
+      unset($_SESSION['login']);
+  }
+  if (isset($_SESSION['login']) && $_SESSION['login'] == "success") {
+      header("location: charts.php");
+  }
+  if (isset($_SESSION['send_recovery']) && $_SESSION['send_recovery'] == "true") {
+      echo "<script type='text/javascript'>alert('Has been sent successfully the link recovery to your email');</script>";
+      unset($_SESSION['send_recovery']);
+  }
+  if (isset($_SESSION['recovery_false']) && $_SESSION['recovery_false'] == "true") {
+      echo "<script type='text/javascript'>alert('Something goes wrong please try again to recovery password');</script>";
+      unset($_SESSION['recovery_false']);
+  }
+  
+?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -57,8 +74,8 @@ if (isset($_GET["msg"]) && $_GET["msg"] == 'failed') {
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck" name="remember" value="1">
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
+                        <input type="checkbox" class="custom-control-input" id="remember" name="remember" value="1">
+                        <label class="custom-control-label" for="remember">Remember Me</label>
                       </div>
                     </div>
                     <input type="submit" name="submit" placehokder="log in" class="btn btn-primary btn-user btn-block" value="Login">
