@@ -5,8 +5,8 @@
     // connection information
     $host = '/zstorage/home/ictest00760/mysql/run/mysql.sock';
     $dbname = 'traffic_monitoring_system';
-    $user = 'root';
-    $pass = 'akrivi123$#';
+    $user = 'akrivi';
+    $pass = 'akrivi123$!';
     // connect to database or return error
     try{
        $pdo = new PDO("mysql:unix_socket=$host;dbname=$dbname;charset=utf8", $user, $pass);
@@ -27,8 +27,8 @@
   
     $host = '/zstorage/home/ictest00760/mysql/run/mysql.sock';
     $dbname = 'traffic_monitoring_system';
-    $user = 'root';
-    $pass = 'akrivi123$#';
+    $user = 'akrivi';
+    $pass = 'akrivi123$!';
     // connect to database or return error
     try{
        $pdo = new PDO("mysql:unix_socket=$host;dbname=$dbname;charset=utf8", $user, $pass);
